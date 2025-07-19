@@ -42,6 +42,7 @@ backend/target/
 .idea/
 .DS_Store
 *.swp
+.env
 
 # Lombok
 **/generated/
