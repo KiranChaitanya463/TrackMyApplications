@@ -27,7 +27,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    private String fullName;
+    private String name;
 
 
     private LocalDateTime createTime;
@@ -43,5 +43,6 @@ public class User {
     protected void onUpdate(){
         updateTime=LocalDateTime.now();
     }
+
 
 }
