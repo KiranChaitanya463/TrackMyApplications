@@ -1,6 +1,5 @@
 package com.trackmyapp.backend.Controller;
 
-
 import com.trackmyapp.backend.DTO.LoginRequest;
 import com.trackmyapp.backend.DTO.LoginResponse;
 import com.trackmyapp.backend.DTO.UserRegisterRequest;
