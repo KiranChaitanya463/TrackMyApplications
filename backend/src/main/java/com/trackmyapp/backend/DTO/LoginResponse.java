@@ -1,8 +1,10 @@
 package com.trackmyapp.backend.DTO;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class LoginResponse {
 
     private String token;
@@ -15,6 +17,7 @@ public class LoginResponse {
         this.token = token;
         this.username = username;
     }
+
 
 
 }
