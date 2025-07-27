@@ -14,8 +14,6 @@ public class JobApplicationRequest {
     private String skills;
     private String notes;
 
-    // Optional: if you're not using session/JWT-based auth, use this to associate the user
-    private Long userId;
 
     public JobApplicationRequest() {}
 
@@ -31,7 +29,6 @@ public class JobApplicationRequest {
         this.status = status;
         this.skills = skills;
         this.notes = notes;
-        this.userId = userId;
     }
 
     // Getters and Setters
@@ -62,6 +59,4 @@ public class JobApplicationRequest {
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
 }
