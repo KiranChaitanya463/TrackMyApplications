@@ -1,6 +1,7 @@
 package com.trackmyapp.backend.Service;
 
 import com.trackmyapp.backend.DTO.JobApplicationRequest;
+import com.trackmyapp.backend.DTO.JobApplicationResponse;
 import com.trackmyapp.backend.Entity.JobApplication;
 import com.trackmyapp.backend.Entity.User;
 import com.trackmyapp.backend.Repository.JobApplicationRepository;
@@ -18,9 +19,6 @@ public class JobApplicationServiceImp implements JobApplicationService{
     @Autowired
     private JobApplicationRepository jobApplicationRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
 
     private User getCurrentUser(){
         var auth= SecurityContextHolder.getContext().getAuthentication();
@@ -31,7 +29,7 @@ public class JobApplicationServiceImp implements JobApplicationService{
     }
 
     @Override
-    public String createJob(JobApplicationRequest request) {
+    public JobApplicationResponse createJob(JobApplicationRequest request) {
         User user=getCurrentUser();
 
         JobApplication job=JobApplication.builder()
@@ -45,25 +43,29 @@ public class JobApplicationServiceImp implements JobApplicationService{
                 .notes(request.getNotes())
                 .user(user)
                 .build();
-        jobApplicationRepository.save(job);
-        return "Job application created successfully";
+        JobApplication savedJob=jobApplicationRepository.save(job);
+        return mapToResponse(savedJob);
     }
 
     @Override
-    public List<JobApplication> getAllJobs() {
+    public List<JobApplicationResponse> getAllJobs() {
         User user=getCurrentUser();
-        return jobApplicationRepository.findByUser(user);
+        return jobApplicationRepository.findByUser(user)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 
     @Override
-    public JobApplication getJobById(Long jobId) {
+    public JobApplicationResponse getJobById(Long jobId) {
         User user=getCurrentUser();
-        return jobApplicationRepository.findByIdAndUser(jobId,user)
+        JobApplication response= jobApplicationRepository.findByIdAndUser(jobId,user)
                 .orElseThrow(()-> new RuntimeException("Job not found or not authorised"));
+        return mapToResponse(response);
     }
 
     @Override
-    public String updateJob(Long jobId, JobApplicationRequest request) {
+    public JobApplicationResponse updateJob(Long jobId, JobApplicationRequest request) {
         User user=getCurrentUser();
 
         JobApplication existing = jobApplicationRepository.findByIdAndUser(jobId, user)
@@ -79,18 +81,35 @@ public class JobApplicationServiceImp implements JobApplicationService{
         existing.setSkills(request.getSkills());
         existing.setNotes(request.getNotes());
 
-        jobApplicationRepository.save(existing);
-        return "Job application updated successfully.";
+        JobApplication updatedJob=jobApplicationRepository.save(existing);
+        return mapToResponse(updatedJob);
     }
 
     @Override
-    public String deleteJob(Long jobId) {
+    public Long deleteJob(Long jobId) {
         User user = getCurrentUser();
 
         JobApplication job = jobApplicationRepository.findByIdAndUser(jobId, user)
                 .orElseThrow(() -> new RuntimeException("Job not found or not authorized"));
 
         jobApplicationRepository.delete(job);
-        return "Job application deleted successfully.";
+        return jobId;
+    }
+
+    private JobApplicationResponse mapToResponse(JobApplication job) {
+        return new JobApplicationResponse(
+                job.getId(),
+                job.getCompanyName(),
+                job.getJobTitle(),
+                job.getJobLocation(),
+                job.getJobType(),
+                job.getApplicationLink(),
+                job.getAppliedDate(),
+                job.getStatus(),
+                job.getSkills(),
+                job.getNotes(),
+                job.getCreatedAt(),
+                job.getUpdatedAt()
+        );
     }
 }
