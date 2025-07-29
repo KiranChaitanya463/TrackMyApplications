@@ -4,6 +4,9 @@ import com.trackmyapp.backend.DTO.LoginRequest;
 import com.trackmyapp.backend.DTO.LoginResponse;
 import com.trackmyapp.backend.DTO.UserRegisterRequest;
 import com.trackmyapp.backend.Entity.User;
+import com.trackmyapp.backend.Exception.InvalidPasswordException;
+import com.trackmyapp.backend.Exception.UserAlreadyExistsException;
+import com.trackmyapp.backend.Exception.UserNotFoundException;
 import com.trackmyapp.backend.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +22,7 @@ public class AutenticationService {
     // Registration
     public LoginResponse register(UserRegisterRequest request){
         if(userRepository.findByEmail(request.getEmail()).isPresent()){
-            throw new RuntimeException("User with this email already exists");
+            throw new UserAlreadyExistsException("User with this email already exists");
         }
 
         User user=User.builder()
@@ -35,9 +38,9 @@ public class AutenticationService {
     // Login
     public LoginResponse login(LoginRequest request){
         User user=userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
         if(!passwordEncoder.matches(request.getPassword(),user.getPassword())){
-            throw new RuntimeException("Invalid password");
+            throw new InvalidPasswordException("Invalid password");
         }
         String token=jwtService.generateToken(user);
         return new LoginResponse(token,user.getName());
