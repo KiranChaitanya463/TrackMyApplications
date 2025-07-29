@@ -4,6 +4,7 @@ import com.trackmyapp.backend.DTO.JobApplicationRequest;
 import com.trackmyapp.backend.DTO.JobApplicationResponse;
 import com.trackmyapp.backend.Entity.JobApplication;
 import com.trackmyapp.backend.Entity.User;
+import com.trackmyapp.backend.Exception.JobNotFoundException;
 import com.trackmyapp.backend.Repository.JobApplicationRepository;
 import com.trackmyapp.backend.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class JobApplicationServiceImp implements JobApplicationService{
     public JobApplicationResponse getJobById(Long jobId) {
         User user=getCurrentUser();
         JobApplication response= jobApplicationRepository.findByIdAndUser(jobId,user)
-                .orElseThrow(()-> new RuntimeException("Job not found or not authorised"));
+                .orElseThrow(()-> new JobNotFoundException("Job not found or not authorised"));
         return mapToResponse(response);
     }
 
