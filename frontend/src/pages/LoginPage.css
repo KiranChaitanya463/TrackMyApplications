@@ -58,3 +58,8 @@
 .login-form p {
   margin-top: 1rem;
 }
+.link {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
