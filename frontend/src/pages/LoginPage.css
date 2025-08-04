@@ -63,3 +63,8 @@
   cursor: pointer;
   text-decoration: underline;
 }
+.error {
+  color: red;
+  margin-bottom: 1rem;
+  min-height: 20px; /* ✅ Reserves space so UI doesn't jump */
+}
