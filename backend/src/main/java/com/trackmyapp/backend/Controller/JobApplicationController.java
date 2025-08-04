@@ -3,13 +3,16 @@ package com.trackmyapp.backend.Controller;
 import com.trackmyapp.backend.DTO.JobApplicationRequest;
 import com.trackmyapp.backend.DTO.JobApplicationResponse;
 import com.trackmyapp.backend.Entity.JobApplication;
+import com.trackmyapp.backend.Entity.User;
 import com.trackmyapp.backend.Service.JobApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/jobs")
 @RequiredArgsConstructor
