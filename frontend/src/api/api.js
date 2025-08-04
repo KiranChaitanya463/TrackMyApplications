@@ -1,30 +1,18 @@
 import axios from "axios";
 
-// Create an axios instance
 const api = axios.create({
-  baseURL: "http://localhost:8080", // Backend base URL
+  baseURL: "http://localhost:8080",
 });
 
-// Attach token automatically for every request
+// ✅ Attach token only for protected endpoints
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (token) {
+
+  // Skip token for login & register endpoints
+  if (token && !config.url.includes("/api/auth/login") && !config.url.includes("/api/auth/register")) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
-
-// Handle errors globally
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // If token expired or unauthorized, redirect to login
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/";
-    }
-    return Promise.reject(error);
-  }
-);
 
 export default api;
