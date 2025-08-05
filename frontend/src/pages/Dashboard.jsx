@@ -23,7 +23,7 @@ const Dashboard = () => {
     notes: ""
   });
 
-  // ✅ Fetch apps and user info
+  //  Fetch apps and user info
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -39,11 +39,9 @@ const Dashboard = () => {
   console.log("Token in localStorage:", localStorage.getItem("token"));
 
   try {
-    const response = await api.get("/api/jobs"); // ✅ No need to pass headers manually (interceptor handles it)
-    console.log("✅ Applications response:", response.data);
+    const response = await api.get("/api/jobs"); //  No need to pass headers manually (interceptor handles it) 
     setApplications(response.data);
   } catch (err) {
-    console.error("❌ Error fetching applications:", err.message, err);
     setApplications([]);
   }
 };
@@ -53,9 +51,8 @@ const Dashboard = () => {
       const response = await api.get("/api/auth/me", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
-      setUserName(response.data); // ✅ Directly set the name (plain string)
+      setUserName(response.data); // Directly set the name (plain string)
     } catch (err) {
-      console.error("Error fetching user info:", err);
       setUserName("User");
     }
   };
@@ -70,7 +67,7 @@ const Dashboard = () => {
 
   const payload = {
     ...formData,
-    appliedDate: formData.appliedDate + "T00:00:00" // ✅ Convert date properly
+    appliedDate: formData.appliedDate + "T00:00:00" //  Convert date properly
   };
 
   try {
@@ -110,14 +107,14 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {/* ✅ Navbar */}
+      {/*  Navbar */}
       <div className="dashboard-navbar">
         <h2>Welcome, {userName}</h2>
         <button onClick={handleLogout}>Logout</button>
       </div>
 
       <div className="dashboard-main">
-        {/* ✅ Left Section */}
+        {/*  Left Section */}
         <div className="dashboard-left">
           <button className="add-btn" onClick={() => { 
             setCurrentApp(null); 
@@ -132,7 +129,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* ✅ Right Section */}
+        {/*  Right Section */}
         <div className="dashboard-right">
           <h3>Applications</h3>
           <div className="applications-list">
@@ -157,7 +154,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* ✅ Popup Form */}
+      {/*  Popup Form */}
       {showForm && (
         <div className="popup-overlay">
           <div className="popup">
@@ -181,7 +178,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* ✅ Delete Confirmation */}
+      {/*  Delete Confirmation */}
       {showDeleteConfirm && (
         <div className="popup-overlay">
           <div className="popup">
