@@ -129,25 +129,45 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/*  Right Section */}
+        {/* ✅ Right Section */}
         <div className="dashboard-right">
           <h3>Applications</h3>
+
+          {/* ✅ Table Header */}
+          <div className="applications-header">
+            <span>Company</span>
+            <span>Title</span>
+            <span>Location</span>
+            <span>Type</span>
+            <span>Status</span>
+            <span>Applied Date</span>
+            <span>Skills</span>
+            <span>Notes</span>
+            <span>Link</span>
+            <span>Actions</span>
+          </div>
+
+          {/* ✅ Application Rows */}
           <div className="applications-list">
             {applications.map((app) => (
-              <div key={app.id} className="application-card">
-                <div className="card-content">
-                  <h4>{app.companyName} - {app.jobTitle}</h4>
-                  <p>{app.jobLocation} | {app.jobType}</p>
-                  <p>Status: {app.status}</p>
-                  <p>Applied: {app.appliedDate}</p>
-                  <p>Skills: {app.skills}</p>
-                  <p>Notes: {app.notes}</p>
-                  <a href={app.applicationLink} target="_blank" rel="noreferrer">Job Link</a>
-                </div>
-                <div className="card-actions">
+              <div key={app.id} className="application-row">
+                <span>{app.companyName}</span>
+                <span>{app.jobTitle}</span>
+                <span>{app.jobLocation}</span>
+                <span>{app.jobType}</span>
+                <span>{app.status}</span>
+                <span>{app.appliedDate.split("T")[0]}</span>
+                <span>{app.skills}</span>
+                <span>{app.notes}</span>
+                <span>
+                  <a href={app.applicationLink} target="_blank" rel="noreferrer">
+                    Link
+                  </a>
+                </span>
+                <span className="row-actions">
                   <button className="icon-btn edit-btn" onClick={() => handleEdit(app)}>✎</button>
                   <button className="icon-btn delete-btn" onClick={() => { setCurrentApp(app); setShowDeleteConfirm(true); }}>🗑</button>
-                </div>
+                </span>
               </div>
             ))}
           </div>
