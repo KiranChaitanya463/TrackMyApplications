@@ -71,3 +71,9 @@ npm start
 
 ### Dashboard
 ![Dashboard](frontend/pages/dashboard.png)
+
+## What i have learned
+1. JWT (JSON Web Tokens)
+2. Spring Security Context
+3. CORS Configuration
+4. User validation with JWT token
