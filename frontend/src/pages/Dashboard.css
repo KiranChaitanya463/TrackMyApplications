@@ -6,7 +6,7 @@
   overflow: hidden; /* Prevent full-page scroll */
 }
 
-/* ✅ Fixed Navbar */
+/*  Fixed Navbar */
 .dashboard-navbar {
   display: flex;
   justify-content: space-between;
@@ -22,7 +22,7 @@
   z-index: 1000;
 }
 
-/* ✅ Main area (below navbar) */
+/*  Main area (below navbar) */
 .dashboard-main {
   display: flex;
   flex: 1;
@@ -31,7 +31,7 @@
   overflow: hidden;
 }
 
-/* ✅ Left Sidebar (fixed height, no scroll) */
+/*  Left Sidebar (fixed height, no scroll) */
 .dashboard-left {
   flex: 1;
   background: #f8f9fa;
@@ -40,8 +40,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 60px; /* ✅ Push below navbar height */
-  height: calc(100vh - 60px); /* ✅ Fill remaining height */
+  margin-top: 60px; /*  Push below navbar height */
+  height: calc(100vh - 60px); /*  Fill remaining height */
 }
 
 /* Add button */
@@ -56,7 +56,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* ✅ Right Section (scrolls internally) */
+/*  Right Section (scrolls internally) */
 .dashboard-right {
   flex: 6;
   display: flex;
@@ -78,7 +78,7 @@
   flex-shrink: 0;
 }
 
-/* ✅ Header stays fixed while rows scroll */
+/*  Header stays fixed while rows scroll */
 .applications-header {
   display: grid;
   grid-template-columns: 1.4fr 1.4fr 1.2fr 1fr 1fr 1.2fr 1.4fr 2fr 0.8fr 0.6fr;
@@ -93,7 +93,7 @@
   z-index: 2;
 }
 
-/* ✅ Scroll only rows */
+/*  Scroll only rows */
 .applications-list {
   flex: 1;
   overflow-y: auto;
@@ -177,7 +177,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000; /* ✅ Ensures popup is above all content */
+  z-index: 2000; /*  Ensures popup is above all content */
 }
 
 .popup {
@@ -185,7 +185,7 @@
   padding: 2rem;
   border-radius: 8px;
   width: 400px;
-  z-index: 2001; /* ✅ Popup content higher than overlay */
+  z-index: 2001; /*  Popup content higher than overlay */
 }
 
 .popup form input, 

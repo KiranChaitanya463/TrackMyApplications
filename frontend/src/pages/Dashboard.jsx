@@ -129,11 +129,11 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* ✅ Right Section */}
+        {/*  Right Section */}
         <div className="dashboard-right">
           <h3>Applications</h3>
 
-          {/* ✅ Table Header */}
+          {/*  Table Header */}
           <div className="applications-header">
             <span>Company</span>
             <span>Title</span>
@@ -147,7 +147,7 @@ const Dashboard = () => {
             <span>Actions</span>
           </div>
 
-          {/* ✅ Application Rows */}
+          {/*  Application Rows */}
           <div className="applications-list">
             {applications.map((app) => (
               <div key={app.id} className="application-row">
