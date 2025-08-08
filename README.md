@@ -33,8 +33,8 @@
 
 ## Clone the repo
 ```bash
-    # Clone the repository
-    git clone https://github.com/KiranChaitanya463/TrackMyApplications
+# Clone the repository
+git clone https://github.com/KiranChaitanya463/TrackMyApplications
 ```
 
 ### Backend 
